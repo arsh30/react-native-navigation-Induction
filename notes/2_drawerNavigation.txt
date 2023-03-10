@@ -1,0 +1,78 @@
+1) npm install @react-navigation/drawer
+2) npm install react-native-gesture-handler react-native-reanimated
+
+[react-native reanimated - ye jbhi krte hai toh plugin me jakr plugin set krte hai
+so open the link reanimated > view docs -> installaation -> 
+plugin wali line copy krni hai and paste in Babael.config.js]
+
+-------------------------------------------
+
+-> start the code from MainScreen.js 
+-> Drawer import krege 
+-> NavigationContainer ye to hum use kr chuke hai in the 
+App.js 
+
+-> make another folder side screens 
+-> side Drawer ki default screen HOmeScreen.js hogi and isko hum use krre hai in MainScreen.js 
+
+------------------------------------
+import Gallery from './Gallery';
+
+const Drawer = createDrawerNavigator();
+
+const MainScreen = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{headerShown: true}}
+      />
+
+      {/* is andr jitni bhi screen bnegi
+      VO SIDE PR AATI JAEGI */}
+
+      <Drawer.Screen
+        name="Gallery"
+        component={Gallery}
+        options={{headerShown: true}}
+      />
+    </Drawer.Navigator>
+  );
+};
+
+-------------------------------
+
+b) We want custome Navigation, means kidr click kre to dusre page pr 
+navigate hoye
+
+Make file SideBar.js -> 
+
+->
+1) MainScreen.js -> isme homeScreen hi bydefault 1 hi rkhna hai 
+bydefault
+
+const MainScreen = () => {
+  return (
+    <Drawer.Navigator drawerContent={props => <Sidebar {...props} />}>
+     // Drawer content me jo denge, vo aayega udr
+
+      <Drawer.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{headerShown: true}}
+      />
+
+      {/* is andr jitni bhi screen bnegi
+      VO SIDE PR AATI JAEGI , IDR 1 HI ROUTE RKHEGE/}
+
+      {/* <Drawer.Screen
+        name="Gallery"
+        component={Gallery}
+        options={{headerShown: true}}
+      /> */}
+    </Drawer.Navigator>
+  );
+};
+
+-----------------FInish--------

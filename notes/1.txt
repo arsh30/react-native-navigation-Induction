@@ -1,0 +1,93 @@
+1) 1st step make stack navigator, jisse hum spash screen jisse hum 1 
+screen se dusri screen pr jaa ske 
+
+2.1) -> npm install @react-navigation/native [install this]
+2.2) -> npm install react-native-screens react-native-safe-area-context
+2.3) -> npm install react-native-gesture-handler [taki ye hmare gester ko handle kr paye jbhi hum 
+kahin click krte hai to ye to monitor kre ]
+
+2.4) -> npm install @react-navigation/native-stack
+
+-----------------------------------------------------
+
+-> create folder "SRC", make file AppNavigator.js
+-> create folder screens in src and make 2 screens 
+
+1) STACK NAVIGATOR 
+
+A) App.js
+
+const App = () => {
+  return <AppNavigator />;
+};
+const styles = StyleSheet.create({});
+export default App;
+
+
+B) App nAVIGATOR.JS -> 
+
+const Stack = createNativeStackNavigator();
+
+const AppNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+      {/* <Text>AppNavigator</Text> */}
+    </NavigationContainer>
+  );
+};
+
+---
+C) Splash.js (Screen) -> 
+
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+
+const Splash = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('MainScreen');
+    }, 3000);
+  });
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{fontSize: 20, fontWeight: 700}}>Splash</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({});
+
+export default Splash;
+
+--------
+
+d) Main Screen.js
+
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+
+const MainScreen = () => {
+  return (
+    <View>
+      <Text>MainScreen</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({});
+
+export default MainScreen;
+

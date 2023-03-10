@@ -1,0 +1,29 @@
+1) npm install @react-navigation/bottom-tabs
+
+2) JO HomeScreen.js bnayi hai; iske andr Bottom ko use krege
+
+3) make folder bottom; make screens Home.js, setting.js, 
+
+
+const Bottom = createBottomTabNavigator();
+
+const HomeScreen = () => {
+  return (
+    <Bottom.Navigator>
+      <Bottom.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+
+      <Bottom.Screen
+        name="Settings"
+        component={Setting}
+        options={{headerShown: false}}
+      />
+    </Bottom.Navigator>
+  );
+};
+
+-------------------------------------------------
+
