@@ -1,16 +1,7 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  View,
-  Dimensions,
-  Alert,
-} from 'react-native';
-import React, {useState, useEffect, useCallback} from 'react';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 
-// const gallery = [
+// const myGall = [
 //   {
 //     id: 1,
 //     name: 'Pathan',
@@ -129,139 +120,31 @@ import React, {useState, useEffect, useCallback} from 'react';
 //   },
 // ];
 
-let limit = 10;
-let loadMore = true;
-
-const Gallery = () => {
-  const [data, setData] = useState([]);
-  const [skip, setSkip] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      let query = `?skip=${skip}&limit=${limit}`;
-      const response = await fetch('https://dummyjson.com/products' + query);
-      const res = await response.json();
-      console.log('Api response', res);
-      if (res.products.length == 0) {
-        loadMore = false;
-      }
-      setData([...data, ...res.products]);
-      // jo prvs data hoga uske sath humne current data daldiya
-      setSkip(skip + 10);
-      // note: jitni upr limit rkhi hai, utni hi  value rakhege
-      // bcoz skip krne ke baad latest item de
-
-      setIsLoading(false);
-    } catch (error) {
-      console.log('Error during Fetch method', error);
-    }
-  };
-
-  const renderItem = useCallback(
-    ({item}) => {
+export default Gallery = () => {
+  const renderItems = ({item}) => {
+    return (
+      <View>
+        <Image style={{height: 200, width: 200}} source={{uri: item.imgUrl}} />
+      </View>
+    );
+  }
+    const renderItems = ({item}) => {
       return (
-        <View style={styles.flatListStyle}>
+        <View>
           <Image
-            source={{uri: item.thumbnail}}
-            style={{width: 150, height: 150, borderRadius: 8}}
+            style={{height: 200, width: 200}}
+            source={{uri: item.imgUrl}}
           />
-
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginVertical: 8,
-            }}>
-            <Text>{item.brand}</Text>
-            <Text>{item.price}</Text>
-          </View> */}
-
-          {/* doubt */}
-          {/* <Text>{item.description}</Text> */}
-          {/* --- */}
         </View>
       );
-      // ye dubatra regerate tbb hoga jb data change hoga,
-      // It is used taki application ki performance inc hoje
-    },
-    [data],
-  );
-
-  const keyExtractor = useCallback((item, index) => {
-    return index.toString();
-  });
-
-  const ItemSeparatorComponent = useCallback(() => {
-    return <View style={{height: 20}}></View>;
-  }, [data]);
-
-  const onEndReached = () => {
-    Alert.alert('End Reached');
-    // jese hi end reached hoga toh api dubara cal krwaege but skip ki values ko
-    // increase krdege
-
-    if (loadMore) {
-      // agr ye true hua toh hi call krwaege APi
-      fetchData();
-    }
+    };
   };
 
-  const listFooterComponent = () => {
-    return <ActivityIndicator style={{marginVertical: 16, size: 'large'}} />;
-  };
   return (
-    <View style={{marginHorizontal: 16, margin: 20}}>
-      {isLoading ? (
-        <View style={styles.loader}>
-          <ActivityIndicator style={{marginVertical: 16}} />
-        </View>
-      ) : (
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          ItemSeparatorComponent={ItemSeparatorComponent}
-          onEndReached={onEndReached}
-          ListFooterComponent={listFooterComponent}
-          // horizontal={true}
-          numColumns={2}
-          style={{margin: 10}}
-        />
-      )}
-      {/* Logic to add pagination  */}
+    <View>
+      <FlatList data={myGall} renderItem={renderItems} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  flatListStyle: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.28,
-    shadowRadius: 1.42,
-
-    elevation: 2,
-    backgroundColor: 'white',
-    padding: 8,
-    margin: 2,
-    borderRadius: 8,
-  },
-
-  loader: {
-    minHeight: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    size: 'large',
-  },
-});
-
-export default Gallery;
+const styles = StyleSheet.create({});

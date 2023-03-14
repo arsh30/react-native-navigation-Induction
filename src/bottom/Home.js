@@ -1,8 +1,16 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
+// import CardDetails from '../components/CardDetails';
 
 const Home = ({navigation}) => {
+  const CardDetails = () => {
+    return (
+      <View style={styles.mainContainer}>
+        <Text>Hello</Text>
+      </View>
+    );
+  };
   return (
     <View style={{flex: 1}}>
       <View
@@ -41,6 +49,8 @@ const Home = ({navigation}) => {
         }}
       />
       <Text>Indian Thali</Text> */}
+
+      <CardDetails />
     </View>
   );
 };

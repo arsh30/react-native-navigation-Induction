@@ -10,7 +10,12 @@ const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: `#009387`,
+          },
+        }}>
         <Stack.Screen
           name="Splash"
           component={Splash}
