@@ -5,6 +5,7 @@ import HomeScreen from '../sidescreens/HomeScreen';
 import Gallery from './Gallery';
 import Sidebar from './Sidebar';
 import Setting from '../bottom/Setting';
+import Profile from './Profile';
 
 const Drawer = createDrawerNavigator();
 /*
@@ -19,6 +20,12 @@ const MainScreen = () => {
       drawerStyle={{width: 280}}
       // drawerContent={props => <Sidebar {...props} />}
     >
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{headerShown: true}}
+      />
+
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
